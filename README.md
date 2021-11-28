@@ -10,7 +10,7 @@ The purpose of the template project is to provide a starting project, based on e
 
 The exact value of the parameters parameters can be checked in the file Application/mx/usart.c.
 
-HelloWorldTask can also use an object from the Low Level API layer to dimostrate the interaction between the different layers in a eLooM based application. For this purpose the template application come with a driver, a PushButtonDrv. It is instantiated by the HelloWorldTask instance and it configures one user button in the development board as external interrupt.
+HelloWorldTask can also use an object from the Low Level API layer to dimostrate the interaction between the different layers in a eLooM based application. For this purpose the template application comes with a driver, a PushButtonDrv. It is instantiated by the HelloWorldTask instance and it configures one user button in the development board as external interrupt.
 
 Every time the button is pressed, the HelloWorldTask generates a PM transaction between STATE1 and TEST states.
 
