@@ -51,19 +51,9 @@ extern "C" {
 #define SYS_PM_EVT_PARAM_SHORT_PRESS            0x01U  ///< Event parameter: short press (< NNN ms).
 #define SYS_PM_EVT_PARAM_LONG_PRESS             0x02U  ///< Event parameter: long press (>= NNN ms).
 #define SYS_PM_EVT_PARAM_DOUBLE_PRESS           0x03U  ///< Event parameter: double press (>= NNN ms).
-/* CTRL parameters */
-#define SYS_PM_EVENT_PARAM_START_ML             0x01U  ///< Event parameter: start the X-CUBE-AI processing.
-#define SYS_PM_EVENT_PARAM_START_NEAI_LEARN     0x02U  ///< Event parameter: start the NanoEdge AI processing in learn mode.
-#define SYS_PM_EVENT_PARAM_START_NEAI_DETECT    0x03U  ///< Event parameter: start the NanoEdge AI processing in detect mode.
-#define SYS_PM_EVENT_PARAM_STOP_PROCESSING      0x04U  ///< Event parameter: stop processing.
 // Generic event parameters
 #define SYS_PM_EVT_PARAM_ENTER_LP               0x01U  ///< Event parameter: enter low power mode command.
 #define SYS_PM_EVT_PARAM_EXIT_LP                0x02U  ///< Event parameter: exit low power mode command.
-
-/* These value identify the active processing AI library in the ::SysPowerStatus */
-#define SYS_X_CUBE_AI_ID                        0x15U ///< X-CUBE-AI ID
-#define SYS_NEAI_DETECT_ID                      0x55U ///< NanoEdge AI ID in detect mode
-#define SYS_NEAI_LEARN_ID                       0x75U ///< NanoEdge AI ID in learn mode
 
 
 /**
@@ -81,30 +71,15 @@ typedef enum {
   E_POWER_MODE_SLEEP_1 = 1,        ///< E_POWER_MODE_SLEEP_1
 
   /**
-   * The system is active and the data logger is started.
+   * Specifies an application power mode state.
    */
-  E_POWER_MODE_SENSORS_ACTIVE = 2, ///< E_POWER_MODE_SENSORS_ACTIVE
-
-  /**
-    * Not used.
-    */
-  E_POWER_MODE_RESERVED = 3,       ///< E_POWER_MODE_RESERVED
-
-  /**
-   * The system is active, sensors are producing data according to their configuration, X-CUBE-AI library is processing the data.
-   */
-  E_POWER_MODE_X_CUBE_AI_ACTIVE = 4,///< E_POWER_MODE_X_CUBE_AI_ACTIVE
-
-  /**
-   * The system is active, sensors are producing data according to their configuration, NanoEdge AI library is processing the data.
-   */
-  E_POWER_MODE_NEAI_ACTIVE = 5,    ///< E_POWER_MODE_NEAI_ACTIVE
+  E_POWER_MODE_TEST = 2,           ///< E_POWER_MODE_TEST
 
   /**
    * Special value. This is not a real state of the PM state machine, instead it is used by the framework
    * to identify the numbers of state in the PM state machine.
    */
-  E_POWER_MODE_NONE = 6            ///< E_POWER_MODE_NONE
+  E_POWER_MODE_NONE = 3            ///< E_POWER_MODE_NONE
 
 }EPowerMode;
 
@@ -118,12 +93,7 @@ typedef struct _SysPowerStatus {
    */
   EPowerMode active_power_mode;
 
-  /**
-   * Specifies the ID of the active AI processing library. Valid value are:
-   * - SYS_X_CUBE_AI_ID
-   * - SYS_NEAI_ID
-   */
-  uint8_t active_ai_lib_id;
+  /* Add other PM specific state here to make it available to application level with the SysGetPowerStatus() function. */
 
 }SysPowerStatus;
 

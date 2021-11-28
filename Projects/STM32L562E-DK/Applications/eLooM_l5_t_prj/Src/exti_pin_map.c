@@ -24,18 +24,10 @@
 #include "drivers/EXTIPinMap.h"
 
 // Forward function declaration.
-void Def_EXTI_Callback(uint16_t nPin) {};
-void ISM330DHCXTask_EXTI_Callback(uint16_t nPin);
-void IIS3DWBTask_EXTI_Callback(uint16_t nPin);
-void HTS221Class_EXTI_Callback(uint16_t nPin);
-void Util_UB_EXTI_Callback(uint16_t nPin);
-void Util_PB_EXTI_Callback(uint16_t nPin);
+void Def_EXTI_Callback(uint16_t pin) {};
+void HW_PB_EXTI_Callback(uint16_t pin);
 
 EXTI_BEGIN_P2F_MAP()
-  EXTI_P2F_MAP_ENTRY(GPIO_PIN_0, Util_UB_EXTI_Callback)
-  EXTI_P2F_MAP_ENTRY(GPIO_PIN_6, HTS221Class_EXTI_Callback)
-  EXTI_P2F_MAP_ENTRY(GPIO_PIN_8, ISM330DHCXTask_EXTI_Callback)
-  EXTI_P2F_MAP_ENTRY(GPIO_PIN_10, Util_PB_EXTI_Callback)
-  EXTI_P2F_MAP_ENTRY(GPIO_PIN_14, IIS3DWBTask_EXTI_Callback)
+  EXTI_P2F_MAP_ENTRY(GPIO_PIN_13, HW_PB_EXTI_Callback)
 
 EXTI_END_P2F_MAP()

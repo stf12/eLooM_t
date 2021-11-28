@@ -37,37 +37,6 @@
 static AManagedTask *spHElloWorldObj = NULL;
 
 
-/**
- * specifies the map (PM_APP, PM_SM). It re-map the state of teh application into the state of the Sensor Manager.
- */
-static EPowerMode spAppPMState2SMPMStateMap[] = {
-    E_POWER_MODE_STATE1,
-    E_POWER_MODE_SLEEP_1,
-    E_POWER_MODE_SENSORS_ACTIVE,
-    E_POWER_MODE_RESERVED,
-    E_POWER_MODE_SENSORS_ACTIVE,
-    E_POWER_MODE_SENSORS_ACTIVE
-};
-
-
-/* Private functions declaration */
-/*********************************/
-
-/**
- * Re-map the PM State Machine of the Sensor Manager managed tasks used in the application according to the following map:
- *
- * | App State                      | Sensor Manager State         |
- * | :----------------------------- | ---------------------------: |
- * | E_POWER_MODE_STATE1            | E_POWER_MODE_STATE1          |
- * | E_POWER_MODE_SLEEP_1           | E_POWER_MODE_SLEEP_1         |
- * | E_POWER_MODE_X_CUBE_AI_ACTIVE  | E_POWER_MODE_SENSORS_ACTIVE  |
- * | E_POWER_MODE_NEAI_ACTIVE       | E_POWER_MODE_SENSORS_ACTIVE  |
- *
- * @param pPMState2PMStateMap [IN] specifies the map (PM_APP, PM_SM).
- * @return SYS_NO_ERROR_CODE if success, an error code otherwise.
- */
-//static sys_error_code_t SensorManagerStateMachineRemap(EPowerMode *pPMState2PMStateMap);
-
 
 /* eLooM framework entry points definition */
 /*******************************************/
@@ -78,7 +47,7 @@ sys_error_code_t SysLoadApplicationContext(ApplicationContext *pAppContext)
   sys_error_code_t xRes = SYS_NO_ERROR_CODE;
 
   // Allocate the task objects
-  spHElloWorldObj = HelloWorldTaskAlloc();
+  spHElloWorldObj = HelloWorldTaskAlloc(&MX_GPIO_PC13InitParams);
 
 
   // Add the task object to the context.

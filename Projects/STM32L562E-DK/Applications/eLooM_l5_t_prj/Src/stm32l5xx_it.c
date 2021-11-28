@@ -23,6 +23,7 @@
 #include "stm32l5xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "drivers/EXTIPinMap.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,6 +49,11 @@
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
 
+/**
+ * Map one EXTI to n callback based on the GPIO PIN.
+ */
+static inline void ExtiDefISR(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -59,6 +65,8 @@
 extern TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN EV */
+
+EXTI_DECLARE_PIN2F_MAP()
 
 /* USER CODE END EV */
 
@@ -175,7 +183,26 @@ void TIM6_IRQHandler(void)
   /* USER CODE END TIM6_IRQn 1 */
 }
 
+/**
+  * @brief This function handles EXTI line13 interrupt.
+  */
+void EXTI13_IRQHandler(void)
+{
+  ExtiDefISR();
+}
+
 /* USER CODE BEGIN 1 */
+
+void ExtiDefISR() {
+  EXTIPin2CallbckMap xMap = EXTI_GET_P2F_MAP();
+  for (int i=0; xMap[i].pfCallback != NULL; i++) {
+    if (__HAL_GPIO_EXTI_GET_IT(xMap[i].nPin)) {
+      /* EXTI line interrupt detected */
+      __HAL_GPIO_EXTI_CLEAR_IT(xMap[i].nPin);
+      xMap[i].pfCallback(xMap[i].nPin);
+    }
+  }
+}
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

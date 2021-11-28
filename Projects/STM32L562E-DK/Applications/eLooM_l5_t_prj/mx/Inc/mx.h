@@ -169,45 +169,11 @@ typedef struct _MX_GPIOParams_t
   GPIO_TypeDef *port;
 } MX_GPIOParams_t;
 
-/**
- * SPI2 configuration parameters.
- */
-extern const MX_SPIParams_t MX_SPI2InitParams;
 
 /**
- * SPI3 configuration parameters.
+ * PC13 (USER_BUTTON) configuration parameters.
  */
-extern const MX_SPIParams_t MX_SPI3InitParams;
-
-/**
- * I2C2 configuration parameters.
- */
-extern const MX_I2CParams_t MX_I2C2InitParams;
-
-/**
- * DFSDM CH0 F1 configuration parameters.
- */
-extern const MX_DFSDMParams_t MX_DFSDMCH0F1InitParams;
-
-/**
- * ADC1 configuration parameters.
- */
-extern const MX_ADCParams_t MX_ADC1InitParams;
-
-/**
- * TIM5 configuration parameters.
- */
-extern const MX_TIMParams_t MX_TIM5InitParams;
-
-/**
- * TIM16 configuration parameters.
- */
-extern const MX_TIMParams_t MX_TIM16InitParams;
-
-/**
- * PF6 (STBC02_SW_SEL) configuration parameters.
- */
-extern const MX_GPIOParams_t MX_GPIO_PF6InitParams;
+extern const MX_GPIOParams_t MX_GPIO_PC13InitParams;
 
 
 #ifdef __cplusplus

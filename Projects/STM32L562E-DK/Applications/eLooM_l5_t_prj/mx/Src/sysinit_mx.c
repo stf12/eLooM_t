@@ -187,10 +187,10 @@ void SysPowerConfig() {
   __HAL_RCC_WAKEUPSTOP_CLK_CONFIG(RCC_STOP_WAKEUPCLOCK_MSI);
 
 
-//  // This function is called in the early step of the system initialization.
-//  // All the PINs used by the application are reconfigured later by the application tasks.
+  // This function is called in the early step of the system initialization.
+  // All the PINs used by the application are reconfigured later by the application tasks.
 
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
+//  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   // TODO: STF - TBD
 }

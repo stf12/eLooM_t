@@ -104,8 +104,6 @@ sys_error_code_t AppPowerModeHelper_vtblInit(IAppPowerModeHelper *_this)
   AppPowerModeHelper *p_obj = (AppPowerModeHelper*)_this;
 
   p_obj->status.active_power_mode = E_POWER_MODE_STATE1;
-  /*p_obj->status.active_ai_lib_id = SYS_X_CUBE_AI_ID;*/
-  p_obj->status.active_ai_lib_id = SYS_NEAI_LEARN_ID;
   p_obj->previous_run_state = E_POWER_MODE_STATE1;
 
   return res;
@@ -126,21 +124,19 @@ EPowerMode AppPowerModeHelper_vtblComputeNewPowerMode(IAppPowerModeHelper *_this
       /* new state depends on on the event parameter */
       if (event.xEvent.nParam == SYS_PM_EVT_PARAM_SHORT_PRESS)
       {
-        p_obj->status.active_ai_lib_id = SYS_X_CUBE_AI_ID;
-        power_mode = E_POWER_MODE_X_CUBE_AI_ACTIVE;
+        power_mode = E_POWER_MODE_TEST;
       }
       else if (event.xEvent.nParam == SYS_PM_EVT_PARAM_DOUBLE_PRESS)
       {
-        p_obj->status.active_ai_lib_id = SYS_NEAI_DETECT_ID;
-        power_mode = E_POWER_MODE_NEAI_ACTIVE;
+        power_mode = E_POWER_MODE_TEST;
       }
       else if (event.xEvent.nParam == SYS_PM_EVT_PARAM_LONG_PRESS)
       {
-        p_obj->status.active_ai_lib_id = SYS_NEAI_LEARN_ID;
-        power_mode = E_POWER_MODE_NEAI_ACTIVE;
+    	/* do nothing to show the system behavior. */
+        __NOP();
       }
     }
-    else if ((power_mode == E_POWER_MODE_X_CUBE_AI_ACTIVE) || (power_mode == E_POWER_MODE_NEAI_ACTIVE))
+    else if (power_mode == E_POWER_MODE_TEST)
     {
       power_mode = E_POWER_MODE_STATE1;
     }
@@ -151,32 +147,7 @@ EPowerMode AppPowerModeHelper_vtblComputeNewPowerMode(IAppPowerModeHelper *_this
     break;
 
   case SYS_PM_EVT_SRC_CTRL:
-    if (power_mode == E_POWER_MODE_STATE1)
-    {
-      if (event.xEvent.nParam == SYS_PM_EVENT_PARAM_START_ML)
-      {
-        power_mode = E_POWER_MODE_X_CUBE_AI_ACTIVE;
-        p_obj->status.active_ai_lib_id = SYS_X_CUBE_AI_ID;
-      }
-      else if (event.xEvent.nParam == SYS_PM_EVENT_PARAM_START_NEAI_DETECT)
-      {
-        power_mode = E_POWER_MODE_NEAI_ACTIVE;
-        p_obj->status.active_ai_lib_id = SYS_NEAI_DETECT_ID;
-      }
-      else if (event.xEvent.nParam == SYS_PM_EVENT_PARAM_START_NEAI_LEARN)
-      {
-        power_mode = E_POWER_MODE_NEAI_ACTIVE;
-        p_obj->status.active_ai_lib_id = SYS_NEAI_LEARN_ID;
-      }
-
-    }
-    else if ((power_mode == E_POWER_MODE_X_CUBE_AI_ACTIVE) || (power_mode == E_POWER_MODE_NEAI_ACTIVE))
-    {
-      if (event.xEvent.nParam == SYS_PM_EVENT_PARAM_STOP_PROCESSING)
-      {
-        power_mode = E_POWER_MODE_STATE1;
-      }
-    }
+    /* the simple Hello World demo does not have an application comtroller object. */
     break;
 
   case SYS_PM_EVT_SRC_LP_TIMER:
@@ -207,19 +178,15 @@ boolean_t AppPowerModeHelper_vtblCheckPowerModeTransaction(IAppPowerModeHelper *
 
   switch (active_power_mode) {
   case E_POWER_MODE_STATE1:
-    if ((new_power_mode == E_POWER_MODE_X_CUBE_AI_ACTIVE) || (new_power_mode == E_POWER_MODE_NEAI_ACTIVE) || (new_power_mode == E_POWER_MODE_SLEEP_1)) {
+    if ((new_power_mode == E_POWER_MODE_TEST) || (new_power_mode == E_POWER_MODE_SLEEP_1)) {
       res = TRUE;
     }
     break;
-  case E_POWER_MODE_X_CUBE_AI_ACTIVE:
+  case E_POWER_MODE_TEST:
     if (new_power_mode == E_POWER_MODE_STATE1) {
       res = TRUE;
     }
     break;
-  case E_POWER_MODE_NEAI_ACTIVE:
-    if (new_power_mode == E_POWER_MODE_STATE1) {
-      res = TRUE;
-    }
     break;  case E_POWER_MODE_SLEEP_1:
     if (new_power_mode == E_POWER_MODE_STATE1) {
       res = TRUE;
@@ -302,21 +269,9 @@ sys_error_code_t AppPowerModeHelper_vtblDidEnterPowerMode(IAppPowerModeHelper *_
 #endif
     break;
 
-  case E_POWER_MODE_X_CUBE_AI_ACTIVE:
+  case E_POWER_MODE_TEST:
 
-    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PMH: X_CUBE_AI_ACTIVE\r\n"));
-
-#if defined(DEBUG) || defined(SYS_DEBUG)
-    {
-      size_t nFreeHeapSize = xPortGetFreeHeapSize();
-      SYS_DEBUGF(SYS_DBG_LEVEL_SL, ("PMH: free heap = %i.\r\n", nFreeHeapSize));
-    }
-#endif
-    break;
-
-  case E_POWER_MODE_NEAI_ACTIVE:
-
-    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PMH: NEAI_ACTIVE\r\n"));
+    SYS_DEBUGF(SYS_DBG_LEVEL_VERBOSE, ("PMH: E_POWER_MODE_TEST\r\n"));
 
 #if defined(DEBUG) || defined(SYS_DEBUG)
     {

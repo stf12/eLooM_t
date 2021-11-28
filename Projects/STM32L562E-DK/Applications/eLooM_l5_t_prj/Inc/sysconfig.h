@@ -26,8 +26,6 @@
 #ifndef SYSCONFIG_H_
 #define SYSCONFIG_H_
 
-/* Sensor Manager PIN configuration for the STWIN board */
-#include "SMPinConfig.h"
 
 // Drivers configuration
 // *********************
@@ -60,45 +58,5 @@
 // uncomment the following lines to change the task common parameters
 #define HW_TASK_CFG_STACK_DEPTH                   360
 #define HW_TASK_CFG_PRIORITY                      (tskIDLE_PRIORITY+1)
-
-// file NeaiTask.c
-#define NAI_TASK_CFG_STACK_DEPTH                  (configMINIMAL_STACK_SIZE*4)
-#define NAI_TASK_CFG_PRIORITY                     (tskIDLE_PRIORITY+2)
-
-// file AITask.c
-#define AI_TASK_CFG_STACK_DEPTH                   (configMINIMAL_STACK_SIZE*40)
-#define AI_TASK_CFG_PRIORITY                      (tskIDLE_PRIORITY+2)
-
-// file AppController.c
-#define CTRL_TASK_CFG_STACK_DEPTH                 (configMINIMAL_STACK_SIZE*12)
-#define CTRL_TASK_CFG_PRIORITY                    (tskIDLE_PRIORITY+3)
-
-// file SMUtilTask.c
-#define UTIL_TASK_CFG_STACK_DEPTH                 240
-#define UTIL_TASK_CFG_PRIORITY                    (tskIDLE_PRIORITY+1)
-
-// SensorManager configuration
-
-// file SensorManager.h
-#define COM_MAX_SENSORS                           3
-
-// file ISM330DHCXTask.c
-#define ISM330DHCX_TASK_CFG_STACK_DEPTH           (configMINIMAL_STACK_SIZE*4)
-#define ISM330DHCX_TASK_CFG_PRIORITY              (tskIDLE_PRIORITY+4)
-
-// file IIS3DWBTask.c
-#define IIS3DWB_TASK_CFG_STACK_DEPTH              (configMINIMAL_STACK_SIZE*3)
-#define IIS3DWB_TASK_CFG_PRIORITY                 (tskIDLE_PRIORITY+4)
-
-// file SPIBusTask.c
-#define SPIBUS_TASK_CFG_STACK_DEPTH               280
-#define SPIBUS_TASK_CFG_PRIORITY                  (tskIDLE_PRIORITY+4)
-
-// DPU configuration
-
-// file CircularBuffer.h
-#define CB_HEAP_ALLOC                             pvPortMalloc
-#define CB_HEAP_FREE                              vPortFree
-
 
 #endif /* SYSCONFIG_H_ */

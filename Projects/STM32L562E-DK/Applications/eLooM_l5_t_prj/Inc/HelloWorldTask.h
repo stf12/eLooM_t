@@ -54,9 +54,14 @@ struct _HelloWorldTask {
   // Task variables should be added here.
 
   /**
-   * The driver used by the task. The actual type is ::NucleoDriver.
+   * The driver used by the task. The actual type is ::PushButtonDriver_t.
    */
   IDriver *m_pxDriver;
+
+  /**
+   * HAL driver configuration parameters.
+   */
+  const void *p_mx_drv_cfg;
 };
 
 
@@ -66,10 +71,13 @@ struct _HelloWorldTask {
 /**
  * Allocate an instance of HelloWorldTask.
  *
- * @return a pointer to the generic obejct ::AManagedTask if success,
+ * @param p_mx_drv_cfg [IN] specifies a ::MX_GPIOParams_t instance declared in the mx.h file.
+ *        It must be a GPIO connected to the user button and configured in EXTI mode.
+ *        If it is NULL then the task ignore the button and no PM transaction will happen in the demo.
+ * @return a pointer to the generic object ::AManagedTask if success,
  * or NULL if out of memory error occurs.
  */
-AManagedTask *HelloWorldTaskAlloc(void);
+AManagedTask *HelloWorldTaskAlloc(const void *p_mx_drv_cfg);
 
 /**
  * Get a pointer to the driver used by the task.

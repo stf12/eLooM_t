@@ -67,16 +67,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Inc/HelloWorldTask_vtbl.h</locationURI>
 		</link>
 		<link>
-			<name>Application/Inc/SMPinConfig.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Inc/SMPinConfig.h</locationURI>
-		</link>
-		<link>
-			<name>Application/Inc/app_messages_parser.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Inc/app_messages_parser.h</locationURI>
-		</link>
-		<link>
 			<name>Application/Inc/apperror.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Inc/apperror.h</locationURI>
@@ -125,11 +115,6 @@
 			<name>Application/Src/HelloWorldTask.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Src/HelloWorldTask.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Src/app_messages_parser.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Src/app_messages_parser.c</locationURI>
 		</link>
 		<link>
 			<name>Application/Src/exti_pin_map.c</name>
@@ -185,6 +170,21 @@
 			<name>Middlewares/eLooM/Src</name>
 			<type>2</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/eLooM/Src</locationURI>
+		</link>
+		<link>
+			<name>Application/Inc/drivers/PushButtonDrv.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Inc/drivers/PushButtonDrv.h</locationURI>
+		</link>
+		<link>
+			<name>Application/Inc/drivers/PushButtonDrv_vtbl.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Inc/drivers/PushButtonDrv_vtbl.h</locationURI>
+		</link>
+		<link>
+			<name>Application/Src/drivers/PushButtonDrv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Src/drivers/PushButtonDrv.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/Core/Include</name>
