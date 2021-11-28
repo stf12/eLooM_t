@@ -19,7 +19,7 @@ Every time the button is pressed, the HelloWorldTask generates a PM transaction 
 This repository contains template projects for different STM32 family. Each project has been developed on a specific board, but it
 is easy to port to a different board of the same MCU family.
 
-The folder organization ties to be inline with STMicroelectronics guidelines. For more information see section  _4.3 Packaging model_  of [UM2388 - Development guidelines for STM32Cube firmware Packs](https://www.st.com/resource/en/user_manual/um2388-development-guidelines-for-stm32cube-firmware-packs-stmicroelectronics.pdf 'UM2388')
+The folder organization tries to be inline with STMicroelectronics guidelines. For more information see section  _4.3 Packaging model_  of [UM2388 - Development guidelines for STM32Cube firmware Packs](https://www.st.com/resource/en/user_manual/um2388-development-guidelines-for-stm32cube-firmware-packs-stmicroelectronics.pdf 'UM2388')
 
 
 ## Available projects template
